@@ -225,6 +225,15 @@ async def wildcard(request: Request, path: str):
         )
 
 def main():
+    banner = """\033[1;36m
+ ____    _____  _    ____ _____   _     _     __  __ 
+| __ )  |  ___|/ \  / ___|_   _| | |   | |   |  \/  |
+|  _ \  | |_  / _ \ \___ \ | |   | |   | |   | |\/| |
+| |_) | |  _|/ ___ \ ___) || |   | |___| |___| |  | |
+|____/  |_| /_/   \_\____/ |_|   |_____|_____|_|  |_|
+                   by marcelomarkus.dev
+\033[0m"""
+    print(banner)
     print("=" * 60)
     print(f"⚡ B-FAST LLM Proxy running on http://localhost:{PROXY_PORT}")
     print(f"⚡ Upstream target: {UPSTREAM_API_BASE}")
