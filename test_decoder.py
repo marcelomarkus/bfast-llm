@@ -8,6 +8,7 @@ from uuid import UUID
 # Add current directory to path
 sys.path.insert(0, str(Path(__file__).parent))
 
+import pytest
 from bfast_llm.decoder import BFastDecoder
 
 
@@ -16,10 +17,7 @@ def test_decoder():
     expected_path = Path("/tmp/bfast_typed_expected.json")
 
     if not binary_path.exists() or not expected_path.exists():
-        print(
-            "Test files not found in /tmp. Please run the b-fast test generator first."
-        )
-        sys.exit(1)
+        pytest.skip("Test files not found in /tmp. Skipping decoder test.")
 
     print("Reading binary data...")
     binary_data = binary_path.read_bytes()
