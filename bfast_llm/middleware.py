@@ -6,16 +6,13 @@ from typing import Any, Dict, List, Tuple, Optional
 from .registry import BFastRegistry
 from .tool import BFastTool
 
-# Auto-discover local b-fast package
-local_bfast_path = Path("/home/markus/dev/b-fast/python")
-if local_bfast_path.exists() and str(local_bfast_path) not in sys.path:
-    sys.path.insert(0, str(local_bfast_path))
-
 try:
     import b_fast
-    B_FAST_AVAILABLE = True
-except ImportError:
-    B_FAST_AVAILABLE = False
+except ImportError as e:
+    raise ImportError(
+        "Could not import 'b_fast'. The 'bfast-py' is a required dependency. "
+        "Please ensure it is installed correctly: 'pip install bfast-py'"
+    ) from e
 
 
 class BFastLLM:
@@ -33,17 +30,13 @@ class BFastLLM:
         Args:
             registry: A BFastRegistry instance. If None, creates an in-memory registry.
             threshold_bytes: Content size threshold above which compression is triggered (default: 1KB).
-            compress_payloads: Whether to apply LZ4 compression to BFast payloads.
+            compress_payloads: Whether to apply compression to BFast payloads.
         """
         self.registry = registry or BFastRegistry()
         self.tool = BFastTool(self.registry)
         self.threshold_bytes = threshold_bytes
         self.compress_payloads = compress_payloads
-        
-        if B_FAST_AVAILABLE:
-            self.encoder = b_fast.BFast()
-        else:
-            self.encoder = None
+        self.encoder = b_fast.BFast()
 
     def compress_messages(self, messages: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], bool]:
         """
@@ -55,10 +48,6 @@ class BFastLLM:
         Returns:
             A tuple of (modified_messages, was_compressed)
         """
-        if not B_FAST_AVAILABLE or self.encoder is None:
-            # If b-fast is not available, bypass compression silently or warn
-            return messages, False
-            
         modified_messages = []
         was_compressed = False
         
