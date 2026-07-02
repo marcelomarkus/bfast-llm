@@ -13,5 +13,5 @@ __all__ = [
     "BFastTool",
     "BFastLLM",
     "wrap_completion",
-    "bfast_tune"
+    "bfast_tune",
 ]

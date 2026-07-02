@@ -8,7 +8,9 @@
 
 **bfast-llm** is an open-source, local-first context compression layer for Large Language Models (LLMs). It intercepts massive JSON structures, tool outputs, and document contents in your LLM prompts, compresses them using the ultra-high performance [B-FAST](https://github.com/marcelomarkus/b-fast) binary protocol, and swaps them with concise, schema-aware placeholders.
 
-If the LLM decides it needs to read the detailed payload to answer a user's question, it uses the injected `bfast_retrieve` tool. The middleware intercepts this tool call, decodes the binary block locally using our high-performance Python B-FAST Decoder, and formats it on the fly (into Markdown tables, JSON, CSV, or YAML) to present back to the LLM.
+If the LLM decides it needs to read the detailed payload to answer a user's question, it uses the injected `bfast_retrieve` tool. The middleware intercepts this tool call, decodes the binary block locally using the high-performance B-FAST decoder, and formats it on the fly (into Markdown tables, JSON, CSV, or YAML) to present back to the LLM.
+
+![B-FAST LLM Proxy](assets/screenshot.png)
 
 ### 📐 Systems Architecture & Flow
 
@@ -52,20 +54,10 @@ sequenceDiagram
 
 ### 📦 Installation
 
-To use `bfast-llm`, you need the core `b-fast` library (for encoding) and `bfast-llm`.
+Install `bfast-llm` directly from PyPI. This will automatically pull and install the core `bfast-py` dependency as well:
 
-#### 1. Compile & Install the Rust Core (`bfast-py`)
-Make sure you compile and install the Python bindings for your local `b-fast` installation:
 ```bash
-cd /home/markus/dev/b-fast
-pip install -e .
-```
-
-#### 2. Install `bfast-llm`
-In your project directory:
-```bash
-cd /home/markus/dev/b-fast-llm
-pip install -e .
+pip install bfast-llm
 ```
 
 ### 🔌 Plug & Play Proxy Mode (Zero Code Changes)
@@ -134,7 +126,9 @@ print(response.choices[0].message.content)
 
 O **bfast-llm** é uma camada de compressão de contexto local-first para Modelos de Linguagem de Grande Porte (LLMs). Ele intercepta grandes estruturas JSON, saídas de ferramentas (tool outputs) e logs nos prompts do LLM, comprime os dados utilizando o protocolo binário de ultra-alta performance [B-FAST](https://github.com/marcelomarkus/b-fast) e os substitui por referências estruturadas conscientes do schema.
 
-Se o LLM decidir que precisa ler os dados detalhados para responder a uma pergunta do usuário, ele aciona a ferramenta integrada `bfast_retrieve`. O middleware intercepta essa chamada, decodifica o bloco binário localmente usando o nosso **Decodificador B-FAST em Python puro** e formata os dados dinamicamente (em tabelas Markdown, JSON, CSV ou YAML) para entregar de volta ao LLM.
+Se o LLM decidir que precisa ler os dados detalhados para responder a uma pergunta do usuário, ele aciona a ferramenta integrada `bfast_retrieve`. O middleware intercepta essa chamada, decodifica o bloco binário localmente utilizando o decodificador de alta performance do B-FAST e formata os dados dinamicamente (em tabelas Markdown, JSON, CSV ou YAML) para entregar de volta ao LLM.
+
+![B-FAST LLM Proxy](assets/screenshot.png)
 
 ### 📐 Arquitetura e Fluxo
 
@@ -176,22 +170,12 @@ sequenceDiagram
 *   **Armazenamento Flexível:** Suporta persistência transient em **Memória (RAM)** ou banco de dados relacional leve **SQLite** para históricos persistentes de agentes.
 *   **Visualização Customizada:** Formata os dados binários para o LLM em tabelas Markdown estruturadas, JSON identado, YAML limpo ou CSV.
 
-### 📦 Instalação e Configuração
+### 📦 Instalação
 
-Para utilizar o `bfast-llm`, você precisa ter a biblioteca core `b-fast` compilada e a biblioteca `bfast-llm` instalada.
+Instale o `bfast-llm` diretamente do PyPI. O instalador gerenciará automaticamente o download e configuração de todas as dependências necessárias, incluindo o core `bfast-py`:
 
-#### 1. Instalar o Core do B-FAST (`bfast-py`)
-Certifique-se de que a biblioteca base em Rust/Python está compilada e instalada no seu ambiente virtual:
 ```bash
-cd /home/markus/dev/b-fast
-pip install -e .
-```
-
-#### 2. Instalar o `bfast-llm`
-No diretório deste projeto:
-```bash
-cd /home/markus/dev/b-fast-llm
-pip install -e .
+pip install bfast-llm
 ```
 
 ### 🔌 Modo Proxy Plug & Play (Zero Alterações de Código)
