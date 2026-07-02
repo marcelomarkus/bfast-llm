@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bfast-llm"
+version = "0.1.0"
+description = "⚡ B-FAST Context Compression Layer for Large Language Models (LLMs)"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "markus"}
+]
+keywords = ["llm", "context-compression", "b-fast", "token-reduction", "binary-serialization"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "bfast-py>=1.2.1",
+    "lz4>=4.3.3",
+    "httpx>=0.24.0",
+    "fastapi>=0.95.0",
+    "uvicorn>=0.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "pyyaml>=6.0",
+]
+yaml = [
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+bfast-llm-proxy = "bfast_llm.proxy:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["bfast_llm"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
