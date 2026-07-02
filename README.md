@@ -100,10 +100,10 @@ If you don't want to change any code in your application (or if you are using ex
 ```python
 import json
 from openai import OpenAI
-from bfast_llm import patch_openai
+from bfast_llm import bfast_tune
 
 # 1. Initialize client and apply patch
-client = patch_openai(OpenAI(api_key="your-api-key"), threshold_bytes=1024)
+client = bfast_tune(OpenAI(api_key="your-api-key"), threshold_bytes=1024)
 
 # 2. Setup messages containing a large payload
 large_query_output = [
@@ -226,10 +226,10 @@ O `bfast-llm` fornece um wrapper extremamente simples para o cliente da OpenAI. 
 ```python
 import json
 from openai import OpenAI
-from bfast_llm import patch_openai
+from bfast_llm import bfast_tune
 
 # 1. Inicializar o cliente da OpenAI e aplicar o patch
-client = patch_openai(OpenAI(api_key="sua-chave-api"), threshold_bytes=1024)
+client = bfast_tune(OpenAI(api_key="sua-chave-api"), threshold_bytes=1024)
 
 # 2. Configurar os dados simulando retorno do banco de dados
 dados_banco = [

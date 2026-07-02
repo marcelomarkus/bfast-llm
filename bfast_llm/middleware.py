@@ -255,9 +255,9 @@ def wrap_completion(completion_func, threshold_bytes: int = 1024, compress_paylo
     return wrapped
 
 
-def patch_openai(client, threshold_bytes: int = 1024, compress_payloads: bool = True):
+def bfast_tune(client, threshold_bytes: int = 1024, compress_payloads: bool = True):
     """
-    Patch an OpenAI client instance to automatically apply B-FAST prompt
+    Tune an LLM client instance (e.g. OpenAI) to automatically apply B-FAST prompt
     compression and handle retrieval tool calls transparently.
     """
     original_create = client.chat.completions.create

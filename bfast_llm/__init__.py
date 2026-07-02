@@ -2,7 +2,7 @@ from .decoder import BFastDecoder, BFastError
 from .compressor import BFastCompressor
 from .registry import BFastRegistry
 from .tool import BFastTool
-from .middleware import BFastLLM, wrap_completion, patch_openai
+from .middleware import BFastLLM, wrap_completion, bfast_tune
 
 __version__ = "0.1.0"
 __all__ = [
@@ -13,5 +13,5 @@ __all__ = [
     "BFastTool",
     "BFastLLM",
     "wrap_completion",
-    "patch_openai"
+    "bfast_tune"
 ]
