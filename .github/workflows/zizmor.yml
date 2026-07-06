@@ -28,7 +28,7 @@ jobs:
           persist-credentials: false
 
       - name: Run zizmor
-        uses: woodruffw/zizmor-action@v1
+        uses: zizmorcore/zizmor-action@v1
         with:
           # Generates SARIF and uploads to GitHub Code Scanning automatically
           fail-on-severity: error
