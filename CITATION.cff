@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "bfast-llm"
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+authors:
+  - given-names: Marcelo
+    family-names: Markus
+    email: marcelomarkus@gmail.com
+repository-code: "https://github.com/marcelomarkus/bfast-llm"
+url: "https://marcelomarkus.github.io/bfast-llm/"
+abstract: "⚡ B-FAST Context Compression Layer for Large Language Models (LLMs)"
+keywords:
+  - "llm"
+  - "context-compression"
+  - "token-reduction"
+  - "b-fast"
+  - "binary-serialization"
+license: "MIT"

@@ -1,10 +1,4 @@
 import json
-import sys
-from pathlib import Path
-
-# Add current directory to path
-sys.path.insert(0, str(Path(__file__).parent))
-
 from bfast_llm import bfast_tune
 
 
@@ -98,7 +92,6 @@ class MockOpenAIClient:
 
 
 def test_tuned_client():
-    print("--- Testing bfast_tune wrapper ---")
     client = MockOpenAIClient()
 
     # Apply bfast_tune to the mock client
@@ -118,11 +111,7 @@ def test_tuned_client():
         },
     ]
 
-    print("Making tuned completion call...")
-    response = tuned_client.chat.completions.create(model="gpt-4o", messages=messages)
-
-    print("\nFinal response:")
-    print(response.choices[0].message.content)
+    tuned_client.chat.completions.create(model="gpt-4o", messages=messages)
 
     # Assertions
     # The completions.create should have been called twice (once for tool call, once for final result)
@@ -138,13 +127,10 @@ def test_tuned_client():
     assert final_messages[4]["role"] == "tool"
     assert "| id | name | role |" in final_messages[4]["content"]
 
-    print("\n✅ bfast_tune completely verified! No boilerplate code, 100% plug & play.")
-
 
 def test_numpy_client():
     import numpy as np
 
-    print("\n--- Testing NumPy array bfast_tune support ---")
     client = MockOpenAIClient()
     tuned_client = bfast_tune(client, threshold_bytes=50)
 
@@ -155,20 +141,10 @@ def test_numpy_client():
         {"role": "tool", "content": array, "tool_call_id": "call_numpy_1"},
     ]
 
-    response = tuned_client.chat.completions.create(model="gpt-4o", messages=messages)
-
-    print("\nNumPy response:")
-    print(response.choices[0].message.content)
+    tuned_client.chat.completions.create(model="gpt-4o", messages=messages)
 
     # Assertions
     assert client.chat.completions.call_count == 2
     final_messages = client.chat.completions.last_messages
     assert "bfast_" in final_messages[1]["content"]
     assert "Stats: min=1.5000" in final_messages[1]["content"]
-
-    print("✅ NumPy support verified successfully!")
-
-
-if __name__ == "__main__":
-    test_tuned_client()
-    test_numpy_client()

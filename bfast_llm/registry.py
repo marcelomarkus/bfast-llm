@@ -4,7 +4,7 @@ from typing import Any, Dict, Optional, Union
 from pathlib import Path
 
 from .decoder import BFastDecoder
-from .compressor import BFastCompressor
+from .summarizer import BFastSummarizer
 
 
 class BFastRegistry:
@@ -60,7 +60,7 @@ class BFastRegistry:
         if summary is None:
             try:
                 decoded = BFastDecoder.decode(binary_data)
-                summary = BFastCompressor.summarize(decoded)
+                summary = BFastSummarizer.summarize(decoded)
             except Exception as e:
                 summary = f"BFast Payload (failed to decode: {e})"
 

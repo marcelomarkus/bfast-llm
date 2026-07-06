@@ -1,0 +1,7 @@
+# Global code owners - require review from marcelomarkus for all changes
+* @marcelomarkus
+
+# Critical configuration and automation files require explicit approval
+/.github/ @marcelomarkus
+/pyproject.toml @marcelomarkus
+/uv.lock @marcelomarkus

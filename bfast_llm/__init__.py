@@ -1,5 +1,5 @@
 from .decoder import BFastDecoder, BFastError
-from .compressor import BFastCompressor
+from .summarizer import BFastSummarizer
 from .registry import BFastRegistry
 from .tool import BFastTool
 from .middleware import BFastLLM, wrap_completion, bfast_tune
@@ -8,7 +8,7 @@ __version__ = "0.1.0"
 __all__ = [
     "BFastDecoder",
     "BFastError",
-    "BFastCompressor",
+    "BFastSummarizer",
     "BFastRegistry",
     "BFastTool",
     "BFastLLM",

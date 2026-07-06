@@ -1,0 +1,34 @@
+name: Zizmor
+
+on:
+  push:
+    branches:
+      - main
+      - feat/*
+      - fix/*
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  zizmor:
+    name: Run zizmor
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      security-events: write  # Required for upload-sarif (used by zizmor-action)
+      contents: read          # Required for checkout
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor
+        uses: woodruffw/zizmor-action@v1
+        with:
+          # Generates SARIF and uploads to GitHub Code Scanning automatically
+          fail-on-severity: error

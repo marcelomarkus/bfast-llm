@@ -1,0 +1,38 @@
+site_name: Documentação bfast-llm
+site_url: https://marcelomarkus.github.io/bfast-llm/pt/
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: teal
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+  language: pt
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [../..]
+
+nav:
+  - Início: index.md
+  - Começando: getting_started.md
+  - Referência da API: api.md
+
+extra:
+  alternate:
+    - name: English
+      link: /bfast-llm/
+      lang: en
+    - name: Português
+      link: /bfast-llm/pt/
+      lang: pt

@@ -4,7 +4,7 @@ from decimal import Decimal
 from uuid import UUID
 
 
-class BFastCompressor:
+class BFastSummarizer:
     """Helper to summarize B-FAST data structure and generate token-efficient representation."""
 
     @classmethod
