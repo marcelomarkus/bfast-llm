@@ -31,4 +31,4 @@ jobs:
         uses: zizmorcore/zizmor-action@v0.5.7
         with:
           # Generates SARIF and uploads to GitHub Code Scanning automatically
-          fail-on-severity: error
+          min-severity: error
