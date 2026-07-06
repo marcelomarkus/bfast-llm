@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
+      attestations: write
     
     steps:
     - uses: actions/checkout@v4
@@ -31,6 +33,11 @@ jobs:
 
     - name: Build source and binary (wheel) distributions
       run: python -m build
+
+    - name: Generate build provenance attestations
+      uses: actions/attest-build-provenance@v1
+      with:
+        subject-path: 'dist/*'
 
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
