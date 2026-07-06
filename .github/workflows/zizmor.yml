@@ -29,6 +29,3 @@ jobs:
 
       - name: Run zizmor
         uses: zizmorcore/zizmor-action@v0.5.7
-        with:
-          # Generates SARIF and uploads to GitHub Code Scanning automatically
-          min-severity: error
